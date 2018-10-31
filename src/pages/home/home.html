@@ -1,15 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>{{'SET.LANGUAGE' | translate}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2> {{ 'HOME.SELECT' | translate }}</h2>
-  <div>
-    <select #langSelect (change)="translate.use(langSelect.value)">
-      <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{
-        lang }}</option>
-    </select>
-  </div>
+  <ion-list radio-group [(ngModel)]="currentLanguage" class="settings-list">
+    <ion-item *ngFor="let language of languages">
+      <ion-label>
+        {{ language.name }}
+      </ion-label>
+      <ion-radio (click)="save(language.isoCode)" [value]="language.isoCode"></ion-radio>
+    </ion-item>
+  </ion-list>
 </ion-content>
